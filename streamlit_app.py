@@ -5,6 +5,8 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
 }
 
+template_url = "https://static.edenviaggi.it/.rest/delivery/pages/edenviaggi-home/vacanze/"
+
 st.title("EdenViaggi URL Modifier")
 
 st.write(
@@ -13,7 +15,7 @@ st.write(
 
 url_input = st.text_input(
     "Input URL",
-    "https://static.edenviaggi.it/.rest/delivery/pages/edenviaggi-home/vacanze/italia/calabria"
+    "https://www.edenviaggi.it/vacanze/italia/calabria"
 )
 
 url_output_template = st.text_input(
@@ -23,7 +25,9 @@ url_output_template = st.text_input(
 
 def get_modified_url(url_in, url_out_template):
     try:
-        response = requests.get(url_in, headers=headers)
+        sub_url = url_in.url_1.split('vacanze')[1]
+        url_to_modify = template_url + sub_url
+        response = requests.get(url_to_modify, headers=headers)
         response.raise_for_status()
         json_response = response.json()
         destination = json_response.get("destination")
