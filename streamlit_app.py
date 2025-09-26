@@ -5,13 +5,13 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
 }
 
-template_url = "https://static.edenviaggi.it/.rest/delivery/pages/edenviaggi-home/vacanze/"
-
 st.title("EdenViaggi URL Modifier")
 
 st.write(
     "Let's start changing URLs in a smart way! :D"
 )
+
+template_url = "https://static.edenviaggi.it/.rest/delivery/pages/edenviaggi-home/vacanze/"
 
 url_input = st.text_input(
     "Input URL",
@@ -25,7 +25,7 @@ url_output_template = st.text_input(
 
 def get_modified_url(url_in, url_out_template):
     try:
-        sub_url = url_in.url_1.split('vacanze')[1]
+        sub_url = url_in.split('vacanze')[1]
         url_to_modify = template_url + sub_url
         response = requests.get(url_to_modify, headers=headers)
         response.raise_for_status()
